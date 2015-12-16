@@ -1,0 +1,1 @@
+16.12.2015, 3 tuntia. GitHub oli minulle uusi juttu, niin meni aikaa sitä tutkiskellessa.
