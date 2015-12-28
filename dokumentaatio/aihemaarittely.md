@@ -1,5 +1,16 @@
-Aihe: shakkipeli. Teen shakkipelin, jota on mahdollista pelata human vs human muodossa. 
+Aihe: Human vs human shakkipeli.
 
-Käyttäjät: Kaikki kiinnostuneet.
+Käyttäjät: Ei ole rajoitettu, luultavasti käyttäjinä tulevat olemaan minä ja kurssin ohjaajat.
 
-Mahdolliset toiminnot: Käyttöliittymän pitäisi olla niin helppokäyttöinen, että kaikki pystyisivät pelaamaan peliä, ilman tekijän ohjeistusta.
+Kaikkien käyttäjien toiminnot:
+
+Pelata kyseistä peliä, ilman että se menee rikki.
+...
+Minun toiminnot:
+
+Kehittää peliä tämän kurssin aikana, sekä ehkä jatkossa käyttää pohjana tekoälyn testaamiseen.
+...
+Ohjaajien toiminnot:
+
+Tarkastella koodiani.
+...

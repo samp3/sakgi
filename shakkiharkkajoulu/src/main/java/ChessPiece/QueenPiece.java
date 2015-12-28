@@ -3,20 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pieces;
+package ChessPiece;
 
-import main.Block;
-import main.Move;
+import Game.Move;
 
 /**
  *
  * @author sampe
  */
-public class KnightPiece extends Piece {
+public class QueenPiece extends ChessPiece {
+
+    
+
+    public QueenPiece(PieceColor color) {
+        super(color);
+        this.type = PieceType.QUEEN;
+        
+    }
 
     @Override
-    boolean isValidMove(Move move, Block where, Block to) {
+    public void legalMove(Move m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
