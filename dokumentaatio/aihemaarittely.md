@@ -10,6 +10,7 @@ Kaikkien käyttäjien toiminnot:
 *Pelin käynnistys.
  
 *Pelinappuloiden siirtäminen hiirellä liu'uttamalla. Siirtovuoro siirtyy vastustajalle hyväksytyn siirron jälkeen. 
+
 *Pelin loppuunsaaminen siten, että voittaja on selvillä.
 
 
