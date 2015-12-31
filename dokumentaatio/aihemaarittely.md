@@ -9,9 +9,10 @@ Kaikkien k‰ytt‰jien toiminnot:
 
 *Pelin k‰ynnistys.
 *Pelinappuloiden siirt‰minen hiirell‰ liu'uttamalla. Siirtovuoro siirtyy vastustajalle hyv‰ksytyn siirron j‰lkeen.
+
 *Pelin loppuunsaaminen siten, ett‰ voittaja on selvill‰.
 
-...
+
 Kehitt‰j‰n(minun) toiminnot:
 
 Kehitt‰‰ peli‰ t‰m‰n kurssin aikana, sek‰ jatkossa k‰ytt‰‰ pohjana teko‰lyn testaamiseen.
