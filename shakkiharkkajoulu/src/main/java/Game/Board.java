@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Game;
 
 import ChessPiece.BishopPiece;
@@ -13,6 +9,9 @@ import ChessPiece.PieceColor;
 import ChessPiece.PieceType;
 import ChessPiece.QueenPiece;
 import ChessPiece.RookPiece;
+/*
+ *Shakkipelin lauta, lauta koostuu 64 ruudusta (Block).
+ */
 
 public class Board {
 
@@ -23,6 +22,9 @@ public class Board {
 
     }
 
+    /**
+     * Asettaa pöydälle Blockit
+     */
     public void createBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -34,7 +36,10 @@ public class Board {
             }
         }
     }
-
+    
+    /**
+     * Asettaa pelinappulat blockeille alkuasentoon.
+     */
     public void setPiecesOnBoard() {
         setPawnsOnBoard();
         board[0][0].setPieceOnBlock(new RookPiece(PieceColor.BLACK));

@@ -6,6 +6,10 @@
 package ChessPiece;
 
 import Game.Move;
+/**
+ * 
+ * Luokka sotilaalle
+ */
 
 public class PawnPiece extends ChessPiece {
 

@@ -6,6 +6,10 @@
 package ChessPiece;
 
 import Game.Move;
+/**
+ * Luokka hevoselle
+ * @author sampe
+ */
 
 public class KnightPiece extends ChessPiece {
 

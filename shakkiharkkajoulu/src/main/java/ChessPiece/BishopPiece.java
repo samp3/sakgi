@@ -8,8 +8,7 @@ package ChessPiece;
 import Game.Move;
 
 /**
- *
- * @author sampe
+ *Luokka lähetille
  */
 public class BishopPiece extends ChessPiece {
 

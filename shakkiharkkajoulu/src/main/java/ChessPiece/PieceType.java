@@ -1,6 +1,8 @@
 
 package ChessPiece;
-
+/**
+ * ChessPiece:n atribuutti. Ei ole välttämätön, mutta helpottaa nappuloiden käsittelyä ja tekee koodista ymmärrettävempää.
+ */
 public enum PieceType {
 
     PAWN,

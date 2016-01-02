@@ -2,6 +2,10 @@ package Game;
 
 import ChessPiece.PieceType;
 
+/**
+ * Move oliot ovat nappuloiden siirtoja pöydällä.
+ */
+
 public class Move {
 
     private Block start;

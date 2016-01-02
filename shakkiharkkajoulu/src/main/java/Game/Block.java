@@ -2,6 +2,9 @@ package Game;
 
 import ChessPiece.ChessPiece;
 import ChessPiece.PieceType;
+/**
+*Shakkilaudan ruudut, laudalla on 64 blockia (ruutua). ChessPiece:t sijaitsevat ruuduilla.
+*/
 
 public class Block {
 
