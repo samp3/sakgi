@@ -1,7 +1,7 @@
-package Game;
+package fi.sakgi.game;
 
-import ChessPiece.ChessPiece;
-import ChessPiece.PieceType;
+import fi.sakgi.chesspiece.ChessPiece;
+
 /**
 *Shakkilaudan ruudut, laudalla on 64 blockia (ruutua). ChessPiece:t sijaitsevat ruuduilla.
 */

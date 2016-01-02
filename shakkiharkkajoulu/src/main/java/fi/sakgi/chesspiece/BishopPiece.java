@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessPiece;
+package fi.sakgi.chesspiece;
 
-import Game.Move;
+import fi.sakgi.game.Move;
+
+
 
 /**
  *Luokka lähetille

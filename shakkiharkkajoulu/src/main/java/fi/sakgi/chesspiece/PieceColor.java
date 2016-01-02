@@ -1,6 +1,5 @@
 
-package ChessPiece;
-
+package fi.sakgi.chesspiece;
 /**
  * ChessPiece:jen atribuutti. Kertoo kummalle pelaajalle nappula kuuluu
  */

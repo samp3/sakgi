@@ -1,14 +1,15 @@
 
-package Game;
+package fi.sakgi.game;
 
-import ChessPiece.BishopPiece;
-import ChessPiece.KingPiece;
-import ChessPiece.KnightPiece;
-import ChessPiece.PawnPiece;
-import ChessPiece.PieceColor;
-import ChessPiece.PieceType;
-import ChessPiece.QueenPiece;
-import ChessPiece.RookPiece;
+import fi.sakgi.chesspiece.BishopPiece;
+import fi.sakgi.chesspiece.KingPiece;
+import fi.sakgi.chesspiece.KnightPiece;
+import fi.sakgi.chesspiece.PawnPiece;
+import fi.sakgi.chesspiece.PieceColor;
+import fi.sakgi.chesspiece.QueenPiece;
+import fi.sakgi.chesspiece.RookPiece;
+
+
 /*
  *Shakkipelin lauta, lauta koostuu 64 ruudusta (Block).
  */

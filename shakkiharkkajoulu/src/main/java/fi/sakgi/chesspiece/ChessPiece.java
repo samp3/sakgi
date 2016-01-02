@@ -1,11 +1,9 @@
-package ChessPiece;
-
-import Game.Move;
-
+package fi.sakgi.chesspiece;
 /**
  * ChessPiece:t sijaitsevat Blockeilla (ruuduilla). Ne eivät itse tiedä missä sijaitsevat.
  */
 
+import fi.sakgi.game.Move;
 public abstract class ChessPiece {
 
     PieceColor color;

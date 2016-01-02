@@ -1,6 +1,8 @@
-package Game;
+package fi.sakgi.game;
 
-import ChessPiece.PieceType;
+import fi.sakgi.chesspiece.PieceType;
+
+
 
 /**
  * Move oliot ovat nappuloiden siirtoja pöydällä.

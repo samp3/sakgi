@@ -1,4 +1,4 @@
-package Game;
+package fi.sakgi.game;
 
 public class Player {
     

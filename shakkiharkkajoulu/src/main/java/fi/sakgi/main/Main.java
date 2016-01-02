@@ -1,6 +1,6 @@
-package Main;
+package fi.sakgi.main;
 
-import Game.Game;
+import fi.sakgi.game.Game;
 
 public class Main {
 

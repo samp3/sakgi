@@ -37,14 +37,14 @@
                 <version>1.1.4</version>
                 <configuration>
                     <targetClasses>
-                        <param>shakkiharkkajoulu.Game.*</param>
-                        <param>shakkiharkkajoulu.Interface.*</param>
-                        <param>shakkiharkkajoulu.ChessPiece.*</param>
+                        <param>fi.sakgi.chessinterface.*</param>
+                        <param>fi.sakgi.chesspiece.*</param>
+                        <param>fi.sakgi.game.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>shakkiharkkajoulu.Game.*</param>
-                        <param>shakkiharkkajoulu.Interface.*</param>
-                        <param>shakkiharkkajoulu.ChessPiece.*</param>
+                        <param>fi.sakgi.chessinterface.*</param>
+                        <param>fi.sakgi.chesspiece.*</param>
+                        <param>fi.sakgi.game.*</param>
                     </targetTests>
                 </configuration>
             </plugin>

@@ -1,6 +1,6 @@
-package Game;
+package fi.sakgi.game;
 
-import Interface.ChessInterface;
+import fi.sakgi.chessinterface.ChessInterface;
 import java.util.LinkedList;
 
 /**

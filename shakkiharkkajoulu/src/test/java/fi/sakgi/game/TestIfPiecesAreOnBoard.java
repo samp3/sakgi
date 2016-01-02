@@ -1,15 +1,14 @@
-package fi.sakgi.game.Game;
+package fi.sakgi.game;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import ChessPiece.PieceColor;
-import ChessPiece.PieceType;
-import Game.Block;
-import Game.Board;
+import fi.sakgi.chesspiece.PieceColor;
+import fi.sakgi.chesspiece.PieceType;
+import fi.sakgi.game.Block;
+import fi.sakgi.game.Board;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -91,6 +90,7 @@ public class TestIfPiecesAreOnBoard {
         assertEquals(block.getChessPiece().getPieceType(), PieceType.KING);
 
     }
+
     @Test
     public void isIn77WhiteRook() {
         Block block = this.board.getBlock(7, 7);
@@ -99,6 +99,7 @@ public class TestIfPiecesAreOnBoard {
         assertEquals(block.getChessPiece().getPieceType(), PieceType.ROOK);
 
     }
+
     @Test
     public void isIn67WhitePawn() {
         Block block = this.board.getBlock(6, 7);
@@ -107,6 +108,7 @@ public class TestIfPiecesAreOnBoard {
         assertEquals(block.getChessPiece().getPieceType(), PieceType.PAWN);
 
     }
+
     @Test
     public void isIn10BlackPawn() {
         Block block = this.board.getBlock(1, 0);

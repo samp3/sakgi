@@ -1,7 +1,7 @@
 package fi.sakgi.chessinterface;
 
-import Game.Board;
-import Game.Move;
+import fi.sakgi.game.Board;
+import fi.sakgi.game.Move;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
