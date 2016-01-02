@@ -1,4 +1,4 @@
-package fi.sakgi.Game;
+package fi.sakgi.game.Game;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

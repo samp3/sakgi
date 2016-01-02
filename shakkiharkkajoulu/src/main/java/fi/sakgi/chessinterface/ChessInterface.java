@@ -1,4 +1,4 @@
-package Interface;
+package fi.sakgi.chessinterface;
 
 import Game.Board;
 import Game.Move;
