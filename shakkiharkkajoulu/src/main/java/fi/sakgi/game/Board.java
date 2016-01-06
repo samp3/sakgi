@@ -1,78 +1,184 @@
-
 package fi.sakgi.game;
 
-import fi.sakgi.chesspiece.BishopPiece;
-import fi.sakgi.chesspiece.KingPiece;
-import fi.sakgi.chesspiece.KnightPiece;
-import fi.sakgi.chesspiece.PawnPiece;
-import fi.sakgi.chesspiece.PieceColor;
-import fi.sakgi.chesspiece.QueenPiece;
-import fi.sakgi.chesspiece.RookPiece;
-
-
-/*
- *Shakkipelin lauta, lauta koostuu 64 ruudusta (Block).
- */
+import fi.sakgi.chesspiece.Bishop;
+import fi.sakgi.chesspiece.King;
+import fi.sakgi.chesspiece.Knight;
+import fi.sakgi.chesspiece.Pawn;
+import fi.sakgi.chesspiece.Queen;
+import fi.sakgi.chesspiece.Rook;
+import java.util.*;
 
 public class Board {
 
-    private Block[][] board;
+    public static String[][] board = {
+        {"r", "k", "b", "q", "a", "b", "k", "r"},
+        {"p", "p", "p", "p", "p", "p", "p", "p"},
+        {" ", " ", " ", " ", " ", " ", " ", " "},
+        {" ", " ", " ", " ", " ", " ", " ", " "},
+        {" ", " ", " ", " ", " ", " ", " ", " "},
+        {" ", " ", " ", " ", " ", " ", " ", " "},
+        {"P", "P", "P", "P", "P", "P", "P", "P"},
+        {"R", "K", "B", "Q", "A", "B", "K", "R"}};
+    //kingPosC ja kingPosL pitävät kuninkaiden sijainnit tallessa, jotta voidaan testata tekeekö siirto oman kuninkaan uhatuksi
+    public static int kingPosC, kingPosL;
 
-    public Board() {
-        board = new Block[8][8];
-
+    /**
+     * Kaikki siirtologiikka on UPPERCASE näkökulmasta, joten vuoron vaihtuessa
+     * pitää kääntää pelilauta SEKÄ swäpätä kaikki lowercaset uppercaseksi ja
+     * toisinpäin.
+     */
+    public static void flip() {
+        String str;
+        for (int i = 0; i < 32; i++) {
+            int row = i / 8;
+            int column = i % 8;
+            if (Character.isUpperCase(board[row][column].charAt(0))) {
+                str = board[row][column].toLowerCase();
+            } else {
+                str = board[row][column].toUpperCase();
+            }
+            if (Character.isUpperCase(board[7 - row][7 - column].charAt(0))) {
+                board[row][column] = board[7 - row][7 - column].toLowerCase();
+            } else {
+                board[row][column] = board[7 - row][7 - column].toUpperCase();
+            }
+            board[7 - row][7 - column] = str;
+        }
+        //Pitää myös vaihtaa kuninkaiden sijainnit toisinpäin
+        int tempKing = kingPosC;
+        kingPosC = 63 - kingPosL;
+        kingPosL = 63 - tempKing;
     }
 
     /**
-     * Asettaa pöydälle Blockit
+     * Tekee listan kaikista mahdollisista siirroista, käy yksitellen jokaisen
+     * ruudun läpi ja hakee siellä sijaitsevalla nappulalle mahdolliset
+     * siirrot(jos siellä sijaitsee jokin nappula).
+     *
+     *
+     * @return
      */
-    public void createBoard() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                //joka toinen mustaa , valkoista
-                Block block = new Block(i, j);
-                block.setPieceNull();
-                board[i][j] = block;
-
+    public static String allLegalMoves() {
+        String list = "";
+        for (int i = 0; i < 64; i++) {
+            switch (board[i / 8][i % 8]) {
+                case "P":
+                    list += Pawn.legalPawnMoves(i);
+                    break;
+                case "R":
+                    list += Rook.legalRookMoves(i);
+                    break;
+                case "K":
+                    list += Knight.legalKnightMoves(i);
+                    break;
+                case "B":
+                    list += Bishop.legalBishopMoves(i);
+                    break;
+                case "Q":
+                    list += Queen.legalQueenMoves(i);
+                    break;
+                case "A":
+                    list += King.legalKingMoves(i);
+                    break;
             }
         }
+        //siirrot muotoa x1y1x2y2"captured piece". x1y1 lähtöruutu, x2y2 mihin siirrettiin ja, jos vikakirjain, on jokin nappula syöty
+        return list;
     }
-    
+
     /**
-     * Asettaa pelinappulat blockeille alkuasentoon.
+     * Tarkastaa onko kuningas turvassa siirron jälkeen
+     *
+     * @return
      */
-    public void setPiecesOnBoard() {
-        setPawnsOnBoard();
-        board[0][0].setPieceOnBlock(new RookPiece(PieceColor.BLACK));
-        board[0][7].setPieceOnBlock(new RookPiece(PieceColor.BLACK));
-        board[7][0].setPieceOnBlock(new RookPiece(PieceColor.WHITE));
-        board[7][7].setPieceOnBlock(new RookPiece(PieceColor.WHITE));
-        board[0][1].setPieceOnBlock(new KnightPiece(PieceColor.BLACK));
-        board[0][6].setPieceOnBlock(new KnightPiece(PieceColor.BLACK));
-        board[7][1].setPieceOnBlock(new KnightPiece(PieceColor.WHITE));
-        board[7][6].setPieceOnBlock(new KnightPiece(PieceColor.WHITE));
-        board[0][2].setPieceOnBlock(new BishopPiece(PieceColor.BLACK));
-        board[0][5].setPieceOnBlock(new BishopPiece(PieceColor.BLACK));
-        board[7][2].setPieceOnBlock(new BishopPiece(PieceColor.WHITE));
-        board[7][5].setPieceOnBlock(new BishopPiece(PieceColor.WHITE));
-        board[0][3].setPieceOnBlock(new QueenPiece(PieceColor.BLACK));
-        board[7][3].setPieceOnBlock(new QueenPiece(PieceColor.WHITE));
-        board[0][4].setPieceOnBlock(new KingPiece(PieceColor.BLACK));
-        board[7][4].setPieceOnBlock(new KingPiece(PieceColor.WHITE));
-
-    }
-
-    public void setPawnsOnBoard() {
-        for (int i = 0; i < 8; i++) {
-            board[6][i].setPieceOnBlock(new PawnPiece(PieceColor.WHITE));
-            board[1][i].setPieceOnBlock(new PawnPiece(PieceColor.BLACK));
+    public static boolean isKingSafe() {
+        //bishop & queen
+        int temp = 1;
+        for (int i = -1; i <= 1; i += 2) {
+            for (int j = -1; j <= 1; j += 2) {
+                try {
+                    while (" ".equals(board[kingPosC / 8 + temp * i][kingPosC % 8 + temp * j])) {
+                        temp++;
+                    }
+                    if ("b".equals(board[kingPosC / 8 + temp * i][kingPosC % 8 + temp * j])
+                            || "q".equals(board[kingPosC / 8 + temp * i][kingPosC % 8 + temp * j])) {
+                        return false;
+                    }
+                } catch (Exception e) {
+                }
+                temp = 1;
+            }
         }
-    }
-    public Block[][] getBoard() {
-        return this.board;
-    }
-    
-    public Block getBlock(int x, int y) {
-        return this.board[x][y];
+        //rook & queen
+        for (int i = -1; i <= 1; i += 2) {
+            try {
+                while (" ".equals(board[kingPosC / 8][kingPosC % 8 + temp * i])) {
+                    temp++;
+                }
+                if ("r".equals(board[kingPosC / 8][kingPosC % 8 + temp * i])
+                        || "q".equals(board[kingPosC / 8][kingPosC % 8 + temp * i])) {
+                    return false;
+                }
+            } catch (Exception e) {
+            }
+            temp = 1;
+            try {
+                while (" ".equals(board[kingPosC / 8 + temp * i][kingPosC % 8])) {
+                    temp++;
+                }
+                if ("r".equals(board[kingPosC / 8 + temp * i][kingPosC % 8])
+                        || "q".equals(board[kingPosC / 8 + temp * i][kingPosC % 8])) {
+                    return false;
+                }
+            } catch (Exception e) {
+            }
+            temp = 1;
+        }
+        //knight
+        for (int i = -1; i <= 1; i += 2) {
+            for (int j = -1; j <= 1; j += 2) {
+                try {
+                    if ("k".equals(board[kingPosC / 8 + i][kingPosC % 8 + j * 2])) {
+                        return false;
+                    }
+                } catch (Exception e) {
+                }
+                try {
+                    if ("k".equals(board[kingPosC / 8 + i * 2][kingPosC % 8 + j])) {
+                        return false;
+                    }
+                } catch (Exception e) {
+                }
+            }
+        }
+        //pawn
+        if (kingPosC >= 16) {
+            try {
+                if ("p".equals(board[kingPosC / 80 - 1][kingPosC % 8 - 1])) {
+                    return false;
+                }
+            } catch (Exception e) {
+            }
+            try {
+                if ("p".equals(board[kingPosC / 80 - 1][kingPosC % 8 + 1])) {
+                    return false;
+                }
+            } catch (Exception e) {
+            }
+            //king
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (i != 0 || j != 0) {
+                        try {
+                            if ("a".equals(board[kingPosC / 8 + i][kingPosC % 8 + j])) {
+                                return false;
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

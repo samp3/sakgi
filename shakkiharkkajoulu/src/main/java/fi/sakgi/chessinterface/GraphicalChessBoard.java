@@ -1,7 +1,7 @@
 package fi.sakgi.chessinterface;
 
 import fi.sakgi.game.Board;
-import fi.sakgi.game.Move;
+import java.awt.Graphics;
 import java.util.function.Consumer;
 
 /**
@@ -12,7 +12,6 @@ public interface GraphicalChessBoard {
 
     public void setBoard(Board board);
 
-    public void refresh();
+    public void refresh(Graphics g);
 
-    public void addMoveListener(Consumer<Move> listener);
 }

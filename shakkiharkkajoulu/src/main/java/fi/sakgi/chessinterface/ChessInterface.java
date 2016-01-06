@@ -2,6 +2,7 @@ package fi.sakgi.chessinterface;
 
 import fi.sakgi.game.Board;
 import fi.sakgi.game.Move;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,15 +18,17 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
- * Tämä luokka hoitaa pelin grafiikan, sekä hiiren liikkuutelut ja nappuloiden siirrot(fyysisesti)
+ * TÃ¤mÃ¤ luokka hoitaa pelin grafiikan, sekÃ¤ hiiren liikkuutelut ja nappuloiden
+ * siirrot(fyysisesti)
  */
-
 public class ChessInterface extends JPanel implements GraphicalChessBoard, MouseListener, MouseMotionListener {
 
     private int startX;
     private int startY;
     private int endX;
     private int endY;
+    private final int sizeOfSquare = 50;
+    private Board board;
 
     public void setUp() {
         this.addMouseListener(this);
@@ -39,84 +42,97 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
         f.setVisible(true);
 
     }
-    /**
-     * Tähän kerään kaikki, mitä pöydälle tarvitsee piirtää. Piirrot ovat jaettu seuraavasti: drawPieces(pelinappuloiden piirto),
-     * paintBoard(värittää pöydän mustat ja valkoiset ruudut) sekä drawCoord(piirtää koordinaatit pöydälle).
-     * @param g 
-     */
 
+    /**
+     * TÃ¤hÃ¤n kerÃ¤Ã¤n kaikki, mitÃ¤ pÃ¶ydÃ¤lle tarvitsee piirtÃ¤Ã¤. Piirrot ovat jaettu
+     * seuraavasti: paintBoard(vÃ¤rittÃ¤Ã¤pÃ¶ydÃ¤n mustat ja valkoiset ruudut) sekÃ¤
+     * refresh(), joka pÃ¤ivittÃ¤Ã¤ nappuloiden paikat.
+     *
+     * @param g
+     */
     public void paintComponent(Graphics g) {
+
         paintBoard(g);
         drawCoords(g);
-        drawPieces(g);
+        refresh(g);
 
     }
 
-    public void drawPieces(Graphics g) {
+    @Override
+    public void refresh(Graphics g) {
         Image chessPiecesImage = new ImageIcon("rsz_chesspieces.png").getImage();
-        //kuinka iso block on ja kuinka iso yksi kuva on SIZExSIZE
-        int sizeOfOneImage = 50;
-        drawPawns(chessPiecesImage, g, sizeOfOneImage);
-        drawKings(chessPiecesImage, g, sizeOfOneImage);
-        drawQueens(chessPiecesImage, g, sizeOfOneImage);
-        drawRooks(chessPiecesImage, g, sizeOfOneImage);
-        drawBishops(chessPiecesImage, g, sizeOfOneImage);
-        drawKnights(chessPiecesImage, g, sizeOfOneImage);
+        for (int i = 0; i < 64; i++) {
+            int j = -1;
+            int k = -1;
+            switch (Board.board[i / 8][i % 8]) {
 
-    }
+                case "P":
+                    j = 5;
+                    k = 0;
 
-    public void drawPawns(Image img, Graphics g, int size) {
-        int j = 2;
-        for (int i = 0; i < 8; i++) {
-            //valkoiset
-            g.drawImage(img, j * size, 8 * size, (j + 1) * size, 9 * size, size * 5, 0, size * 6, size, this);
-            //mustat
-            g.drawImage(img, j * size, 3 * size, (j + 1) * size, 4 * size, size * 5, size, size * 6, size * 2, this);
-            j++;
+                    break;
+                case "R":
+                    j = 2;
+                    k = 0;
+
+                    break;
+                case "K":
+                    j = 4;
+                    k = 0;
+
+                    break;
+                case "B":
+                    j = 3;
+                    k = 0;
+
+                    break;
+                case "Q":
+                    j = 1;
+                    k = 0;
+
+                    break;
+                case "A":
+                    j = 0;
+                    k = 0;
+
+                    break;
+                case "a":
+                    j = 0;
+                    k = 1;
+
+                    break;
+                case "p":
+                    j = 5;
+                    k = 1;
+
+                    break;
+                case "r":
+                    j = 2;
+                    k = 1;
+
+                    break;
+                case "k":
+                    j = 4;
+                    k = 1;
+
+                    break;
+                case "b":
+                    j = 3;
+                    k = 1;
+
+                    break;
+                case "q":
+                    j = 1;
+                    k = 1;
+
+                    break;
+
+            }
+            if (k != -1 && j != -1) {
+                g.drawImage(chessPiecesImage, 100 + (i % 8) * this.sizeOfSquare, 100 + (i / 8) * this.sizeOfSquare, (i % 8 + 1) * this.sizeOfSquare + 100, 100 + (i / 8 + 1) * this.sizeOfSquare, j * 50, k * 50, (j + 1) * 50, (k + 1) * 50, this);
+            }
         }
-    }
 
-    public void drawKings(Image img, Graphics g, int size) {
-        //valkoinen kuningas
-        g.drawImage(img, 6 * size, 9 * size, 7 * size, 10 * size, 0, 0, size, size, this);
-        //musta kuningas
-        g.drawImage(img, 6 * size, 2 * size, 7 * size, 3 * size, 0, size, size, size * 2, this);
-    }
-
-    public void drawQueens(Image img, Graphics g, int size) {
-
-        //valkoinen kuningatar
-        g.drawImage(img, 5 * size, 9 * size, 6 * size, 10 * size, size, 0, size * 2, size, this);
-        //musta kuningatar
-        g.drawImage(img, 5 * size, 2 * size, 6 * size, 3 * size, size, size, size * 2, size * 2, this);
-
-    }
-
-    public void drawRooks(Image img, Graphics g, int size) {
-        //valkoiset tornit
-        g.drawImage(img, 2 * size, 9 * size, 3 * size, 10 * size, size * 2, 0, size * 3, size, this);
-        g.drawImage(img, 9 * size, 9 * size, 10 * size, 10 * size, size * 2, 0, size * 3, size, this);
-        //mustat tornit
-        g.drawImage(img, 2 * size, 2 * size, 3 * size, 3 * size, size * 2, size, size * 3, size * 2, this);
-        g.drawImage(img, 9 * size, 2 * size, 10 * size, 3 * size, size * 2, size, size * 3, size * 2, this);
-    }
-
-    public void drawBishops(Image img, Graphics g, int size) {
-        //valkoiset lähetit
-        g.drawImage(img, 4 * size, 9 * size, 5 * size, 10 * size, size * 3, 0, size * 4, size, this);
-        g.drawImage(img, 7 * size, 9 * size, 8 * size, 10 * size, size * 3, 0, size * 4, size, this);
-        //mustat lähetit
-        g.drawImage(img, 4 * size, 2 * size, 5 * size, 3 * size, size * 3, size, size * 4, size * 2, this);
-        g.drawImage(img, 7 * size, 2 * size, 8 * size, 3 * size, size * 3, size, size * 4, size * 2, this);
-    }
-
-    public void drawKnights(Image img, Graphics g, int size) {
-        //valkoiset hepat
-        g.drawImage(img, 3 * size, 9 * size, 4 * size, 10 * size, size * 4, 0, size * 5, size, this);
-        g.drawImage(img, 8 * size, 9 * size, 9 * size, 10 * size, size * 4, 0, size * 5, size, this);
-        //mustat hevoset
-        g.drawImage(img, 3 * size, 2 * size, 4 * size, 3 * size, size * 4, size, size * 5, size * 2, this);
-        g.drawImage(img, 8 * size, 2 * size, 9 * size, 3 * size, size * 4, size, size * 5, size * 2, this);
     }
 
     public void paintBoard(Graphics g) {
@@ -155,56 +171,91 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
 
     @Override
     public void setBoard(Board board) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void refresh() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void addMoveListener(Consumer<Move> listener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.board = board;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        startX = e.getX();
-        startY = e.getY();
-        repaint();
+        //testataan ensin osuuko hiirenpainallus pelilaudalle.
+        if (e.getX() < 8 * this.sizeOfSquare + 100 && e.getX() > 100 && e.getY() < 8 * this.sizeOfSquare + 100 && e.getY() > 100) {
+            //tallenetaan koordinaatit ylÃ¶s 
+            startX = e.getX();
+            startY = e.getY();
+            repaint();
+
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        //testataan ensin osuuko hiirenpainallus pelilaudalle.
+        if (e.getX() < 8 * this.sizeOfSquare + 100 && e.getX() > 100 && e.getY() < 8 * this.sizeOfSquare + 100 && e.getY() > 100) {
+            //tallenetaan koordinaatit ylÃ¶s 
+            endX = e.getX();
+            endY = e.getY();
 
+            //tarkastetaan, ettÃ¤ pÃ¤Ã¤stetty nÃ¤ppÃ¤in on mouse1
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                String move = "";
+                if (startY / sizeOfSquare == 3 && endY / sizeOfSquare == 2 && Board.board[startY - 100 / sizeOfSquare][startX - 100 / sizeOfSquare].equals("P")) {
+                    //sotilas pÃ¤Ã¤see takarack. Tee kysymys, miksi halutaan promotea. Laitetaan aluksi Q
+                    move = "" + (startX - 100) / sizeOfSquare + (endX - 100) / sizeOfSquare + Board.board[(endY - 100) / sizeOfSquare][(endX - 100) / sizeOfSquare] + "QP";
+                } else {
+                    move = "" + (startY - 100) / sizeOfSquare + (startX - 100) / sizeOfSquare + (endY - 100) / sizeOfSquare + (endX - 100) / sizeOfSquare + Board.board[(endY - 100) / sizeOfSquare][(endX - 100) / sizeOfSquare];
+                }
+                String legalMoves = Board.allLegalMoves();
+                if (legalMoves.replaceAll(move, "").length() < legalMoves.length()) {
+                    Move.makeMove(move);
+                    Board.flip();
+                }
+            }
+
+            repaint();
+        }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        this.endX = e.getX();
-        this.endY = e.getY();
-        repaint();
+//        //testataan ensin osuuko hiirenpainallus pelilaudalle.
+//        if (e.getX() < 8 * this.sizeOfSquare + 100 && e.getX() > 100 && e.getY() < 8 * this.sizeOfSquare + 100 && e.getY() > 100) {
+//            //tallenetaan koordinaatit ylÃ¶s 
+//            endX = e.getX();
+//            endY = e.getY();
+//
+//            //tarkastetaan, ettÃ¤ pÃ¤Ã¤stetty nÃ¤ppÃ¤in on mouse1
+//            if (e.getButton() == MouseEvent.BUTTON1) {
+//                String move = "";
+//                if (startY / sizeOfSquare == 3 && endY / sizeOfSquare == 2 && Board.board[startY - 100 / sizeOfSquare][startX - 100 / sizeOfSquare].equals("P")) {
+//                    //sotilas pÃ¤Ã¤see takarack. Tee kysymys, miksi halutaan promotea. Laitetaan aluksi Q
+//                    move = "" + (startX - 100) / sizeOfSquare + (endX - 100) / sizeOfSquare + Board.board[(endY - 100) / sizeOfSquare][(endX - 100) / sizeOfSquare] + "QP";
+//                } else {
+//                    move = "" + (startY - 100) / sizeOfSquare + (startX - 100) / sizeOfSquare + (endY - 100) / sizeOfSquare + (endX - 100) / sizeOfSquare + Board.board[(endY - 100) / sizeOfSquare][(endX - 100) / sizeOfSquare];
+//                }
+//                String legalMoves = Board.allLegalMoves();
+//                if (legalMoves.replaceAll(move, "").length() < legalMoves.length()) {
+//                    Move.makeMove(move);
+//                }
+//            }
+//
+//            repaint();
+
+//        }
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
     }
 
 }
