@@ -14,4 +14,4 @@
 
 5.1	       8 tuntia. Siirtologiikkaa.
 
-6.1            6 tuntia. Palautukseen vaadittavien tehtävien teko sekä katselmointi.
+6.1            6 tuntia. Palautukseen vaadittavien tehtävien teko sekä katselmointi. Testejä ei ole hirveästi, koska testasin siirtologiikkaa UIn kautta.

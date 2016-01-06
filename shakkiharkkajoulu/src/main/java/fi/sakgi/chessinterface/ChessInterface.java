@@ -18,8 +18,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
- * TÃ¤mÃ¤ luokka hoitaa pelin grafiikan, sekÃ¤ hiiren liikkuutelut ja nappuloiden
- * siirrot(fyysisesti)
+ * TÃ¤mÃ¤ luokka hoitaa pelin grafiikan, sekÃ¤ hiiren liikkuutelut ja
+ * nappuloiden siirrot(fyysisesti)
  */
 public class ChessInterface extends JPanel implements GraphicalChessBoard, MouseListener, MouseMotionListener {
 
@@ -44,9 +44,9 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
     }
 
     /**
-     * TÃ¤hÃ¤n kerÃ¤Ã¤n kaikki, mitÃ¤ pÃ¶ydÃ¤lle tarvitsee piirtÃ¤Ã¤. Piirrot ovat jaettu
-     * seuraavasti: paintBoard(vÃ¤rittÃ¤Ã¤pÃ¶ydÃ¤n mustat ja valkoiset ruudut) sekÃ¤
-     * refresh(), joka pÃ¤ivittÃ¤Ã¤ nappuloiden paikat.
+     * TÃ¤hÃ¤n kerÃ¤Ã¤n kaikki, mitÃ¤ pÃ¶ydÃ¤lle tarvitsee piirtÃ¤Ã¤. Piirrot
+     * ovat jaettu seuraavasti: paintBoard(vÃ¤rittÃ¤Ã¤pÃ¶ydÃ¤n mustat ja
+     * valkoiset ruudut) sekÃ¤ refresh(), joka pÃ¤ivittÃ¤Ã¤ nappuloiden paikat.
      *
      * @param g
      */
@@ -57,7 +57,10 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
         refresh(g);
 
     }
-
+    /**
+     * Paivittaa nappuloiden sijainnin pöydällä.
+     * @param g 
+     */
     @Override
     public void refresh(Graphics g) {
         Image chessPiecesImage = new ImageIcon("rsz_chesspieces.png").getImage();
@@ -134,6 +137,11 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
         }
 
     }
+    
+    /**
+     * Piirtaa shakkipoydan
+     * @param g 
+     */
 
     public void paintBoard(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
@@ -150,7 +158,11 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
         }
 
     }
-
+    
+    /**
+     * piirtaa koordinaatit poydalle
+     * @param g 
+     */
     public void drawCoords(Graphics g) {
         g.setColor(Color.WHITE);
         char[] charArray = {'s', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
@@ -210,7 +222,7 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
                 String legalMoves = Board.allLegalMoves();
                 if (legalMoves.replaceAll(move, "").length() < legalMoves.length()) {
                     Move.makeMove(move);
-                    Board.flip();
+
                 }
             }
 
@@ -228,30 +240,7 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
 
     @Override
     public void mouseDragged(MouseEvent e) {
-//        //testataan ensin osuuko hiirenpainallus pelilaudalle.
-//        if (e.getX() < 8 * this.sizeOfSquare + 100 && e.getX() > 100 && e.getY() < 8 * this.sizeOfSquare + 100 && e.getY() > 100) {
-//            //tallenetaan koordinaatit ylÃ¶s 
-//            endX = e.getX();
-//            endY = e.getY();
-//
-//            //tarkastetaan, ettÃ¤ pÃ¤Ã¤stetty nÃ¤ppÃ¤in on mouse1
-//            if (e.getButton() == MouseEvent.BUTTON1) {
-//                String move = "";
-//                if (startY / sizeOfSquare == 3 && endY / sizeOfSquare == 2 && Board.board[startY - 100 / sizeOfSquare][startX - 100 / sizeOfSquare].equals("P")) {
-//                    //sotilas pÃ¤Ã¤see takarack. Tee kysymys, miksi halutaan promotea. Laitetaan aluksi Q
-//                    move = "" + (startX - 100) / sizeOfSquare + (endX - 100) / sizeOfSquare + Board.board[(endY - 100) / sizeOfSquare][(endX - 100) / sizeOfSquare] + "QP";
-//                } else {
-//                    move = "" + (startY - 100) / sizeOfSquare + (startX - 100) / sizeOfSquare + (endY - 100) / sizeOfSquare + (endX - 100) / sizeOfSquare + Board.board[(endY - 100) / sizeOfSquare][(endX - 100) / sizeOfSquare];
-//                }
-//                String legalMoves = Board.allLegalMoves();
-//                if (legalMoves.replaceAll(move, "").length() < legalMoves.length()) {
-//                    Move.makeMove(move);
-//                }
-//            }
-//
-//            repaint();
-
-//        }
+        repaint();
     }
 
     @Override
