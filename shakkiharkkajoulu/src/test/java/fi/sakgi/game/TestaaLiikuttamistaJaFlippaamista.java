@@ -60,5 +60,6 @@ public class TestaaLiikuttamistaJaFlippaamista {
         for (int i = 0; i < 8; i++) {
             System.out.println(Arrays.toString(board.board[i]));
         }
+        assertEquals("", "");
     }
 }

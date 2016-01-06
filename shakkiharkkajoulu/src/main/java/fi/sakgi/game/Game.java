@@ -15,7 +15,6 @@ public class Game {
     private boolean gameIsOver;
     private boolean whiteTurn;
     private ChessInterface intrface;
-    private Move move;
     
     public Game() {
         this.intrface = new ChessInterface();
@@ -24,16 +23,11 @@ public class Game {
         this.board = new Board();
         gameIsOver = false;
         whiteTurn = true;
-        this.move = new Move();
-        
-        
     }
     
     //käynnistää pelin
     public void play() {
         this.intrface.setUp();
-        
-        
     }
     
     

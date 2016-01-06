@@ -35,6 +35,6 @@ public class TestLegalMovesStartPos {
     @Test
     public void getAllLegalMoves() {
         System.out.println(board.allLegalMoves());
-
+        assertEquals("","");
     }
 }
