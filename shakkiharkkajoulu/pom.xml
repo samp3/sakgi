@@ -37,12 +37,10 @@
                 <version>1.1.4</version>
                 <configuration>
                     <targetClasses>
-                        <param>fi.sakgi.chessinterface.*</param>
                         <param>fi.sakgi.chesspiece.*</param>
                         <param>fi.sakgi.game.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>fi.sakgi.chessinterface.*</param>
                         <param>fi.sakgi.chesspiece.*</param>
                         <param>fi.sakgi.game.*</param>
                     </targetTests>

@@ -8,6 +8,10 @@ import fi.sakgi.chesspiece.Queen;
 import fi.sakgi.chesspiece.Rook;
 import java.util.*;
 
+/**
+ * Shakkipöytä, pitää kirjaa kaikista mahdollisista siirroista
+ * @author sampe
+ */
 public class Board {
 
     public static String[][] board = {

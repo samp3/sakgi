@@ -29,16 +29,13 @@ public class Game {
         
     }
     
+    //käynnistää pelin
     public void play() {
         this.intrface.setUp();
         
-        gameLoop();
         
     }
     
-    public void gameLoop() {
-        
-    }
     
     public void changeTurn() {
         if (this.whiteTurn) {

@@ -2,9 +2,19 @@ package fi.sakgi.game;
 
 import static fi.sakgi.game.Board.board;
 
+/**
+ * Move tekee siirrot
+ *
+ * @author sampe
+ */
 public class Move {
 //lisää myös enpassant ja linnoitukseen
 
+    /**
+     * Tekee siirron
+     *
+     * @param move
+     */
     public static void makeMove(String move) {
         if (move.charAt(4) != 'P') {
             board[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))] = board[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))];
