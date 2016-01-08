@@ -1,7 +1,7 @@
 package fi.sakgi.chessinterface;
 
 import fi.sakgi.game.Board;
-import fi.sakgi.game.Move;
+import fi.sakgi.game.MakeMove;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -29,11 +29,13 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
     private int endY;
     private final int sizeOfSquare = 50;
     private Board board;
+    private boolean vuoro = true;
+    private JFrame f;
 
     public void setUp() {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        JFrame f = new JFrame("Chess");
+        f = new JFrame("Chess");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(600, 600);
         f.getContentPane().add(this);
@@ -52,14 +54,29 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
      */
     public void paintComponent(Graphics g) {
 
-        paintBoard(g);
-        drawCoords(g);
-        refresh(g);
+        if (vuoro) {
+            g.setColor(Color.DARK_GRAY);
+            g.fillRect(0, 0, 600, 600);
 
+            paintBoard(g);
+            refresh(g);
+            drawCoords(g);
+
+        } else {
+            g.setColor(Color.DARK_GRAY);
+            g.fillRect(0, 0, 600, 600);
+
+            paintBoard(g);
+            refresh(g);
+            drawCoordsW(g);
+
+        }
     }
+
     /**
      * Paivittaa nappuloiden sijainnin pöydällä.
-     * @param g 
+     *
+     * @param g
      */
     @Override
     public void refresh(Graphics g) {
@@ -137,12 +154,12 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
         }
 
     }
-    
+
     /**
      * Piirtaa shakkipoydan
-     * @param g 
+     *
+     * @param g
      */
-
     public void paintBoard(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(100, 100, 400, 400);
@@ -158,10 +175,11 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
         }
 
     }
-    
+
     /**
      * piirtaa koordinaatit poydalle
-     * @param g 
+     *
+     * @param g
      */
     public void drawCoords(Graphics g) {
         g.setColor(Color.WHITE);
@@ -181,6 +199,22 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
 
     }
 
+    public void drawCoordsW(Graphics g) {
+
+        g.setColor(Color.WHITE);
+        char[] charArray = {'s', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'};
+        int j = 1;
+        int raja = 125 + 7 * 50;
+        for (int i = 125; i <= raja; i += 50) {
+
+            g.drawString("" + charArray[j], i, 92);
+            g.drawString("" + charArray[j], i, 515);
+            g.drawString("" + j, 85, i);
+            g.drawString("" + j, 510, i);
+            j++;
+        }
+    }
+
     @Override
     public void setBoard(Board board) {
         this.board = board;
@@ -190,6 +224,11 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
     public void mouseClicked(MouseEvent e) {
     }
 
+    /**
+     * Ottaa hiirenpainalluksesta alkukoordinaatit
+     *
+     * @param e
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         //testataan ensin osuuko hiirenpainallus pelilaudalle.
@@ -202,6 +241,12 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
         }
     }
 
+    /**
+     * Ottaa loppukoordinaatit(kun hiirenpainallukseta päästetään irti) Tekee
+     * myös siirron
+     *
+     * @param e
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         //testataan ensin osuuko hiirenpainallus pelilaudalle.
@@ -213,16 +258,22 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
             //tarkastetaan, ettÃ¤ pÃ¤Ã¤stetty nÃ¤ppÃ¤in on mouse1
             if (e.getButton() == MouseEvent.BUTTON1) {
                 String move = "";
-                if (startY / sizeOfSquare == 3 && endY / sizeOfSquare == 2 && Board.board[startY - 100 / sizeOfSquare][startX - 100 / sizeOfSquare].equals("P")) {
+                if ((startY - 100) / sizeOfSquare == 1 && (endY - 100) / sizeOfSquare == 0 && Board.board[(startY - 100) / sizeOfSquare][(startX - 100) / sizeOfSquare].equals("P")) {
                     //sotilas pÃ¤Ã¤see takarack. Tee kysymys, miksi halutaan promotea. Laitetaan aluksi Q
+
                     move = "" + (startX - 100) / sizeOfSquare + (endX - 100) / sizeOfSquare + Board.board[(endY - 100) / sizeOfSquare][(endX - 100) / sizeOfSquare] + "QP";
                 } else {
                     move = "" + (startY - 100) / sizeOfSquare + (startX - 100) / sizeOfSquare + (endY - 100) / sizeOfSquare + (endX - 100) / sizeOfSquare + Board.board[(endY - 100) / sizeOfSquare][(endX - 100) / sizeOfSquare];
                 }
                 String legalMoves = Board.allLegalMoves();
                 if (legalMoves.replaceAll(move, "").length() < legalMoves.length()) {
-                    Move.makeMove(move);
-
+                    MakeMove.makeMove(move);
+                    if (vuoro) {
+                        vuoro = false;
+                    } else {
+                        vuoro = true;
+                    }
+                    board.flip();
                 }
             }
 
@@ -240,7 +291,6 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        repaint();
     }
 
     @Override

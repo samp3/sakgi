@@ -6,8 +6,7 @@
 package fi.sakgi.game;
 
 import fi.sakgi.game.Board;
-import fi.sakgi.game.Move;
-import static fi.sakgi.game.Move.makeMove;
+import static fi.sakgi.game.MakeMove.makeMove;
 import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -33,7 +32,7 @@ public class TestaaLiikuttamistaJaFlippaamista {
     public static void tearDownClass() {
     }
     Board board;
-    Move movemaker;
+    MakeMove movemaker;
 
     @Before
     public void setUp() {

@@ -1,11 +1,11 @@
 package fi.sakgi.game;
 
-import fi.sakgi.chesspiece.Bishop;
-import fi.sakgi.chesspiece.King;
-import fi.sakgi.chesspiece.Knight;
-import fi.sakgi.chesspiece.Pawn;
-import fi.sakgi.chesspiece.Queen;
-import fi.sakgi.chesspiece.Rook;
+import fi.sakgi.movealgorithms.Bishop;
+import fi.sakgi.movealgorithms.King;
+import fi.sakgi.movealgorithms.Knight;
+import fi.sakgi.movealgorithms.Pawn;
+import fi.sakgi.movealgorithms.Queen;
+import fi.sakgi.movealgorithms.Rook;
 import java.util.*;
 
 /**
@@ -86,7 +86,6 @@ public class Board {
                     break;
             }
         }
-        //siirrot muotoa x1y1x2y2"captured piece". x1y1 lähtöruutu, x2y2 mihin siirrettiin ja, jos vikakirjain, on jokin nappula syöty
         return list;
     }
 

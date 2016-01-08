@@ -1,13 +1,14 @@
 package fi.sakgi.game;
 
+import fi.sakgi.game.Board;
 import static fi.sakgi.game.Board.board;
 
 /**
- * Move tekee siirrot
+ * MakeMove tekee siirrot
  *
  * @author sampe
  */
-public class Move {
+public class MakeMove {
 //lisää myös enpassant ja linnoitukseen
 
     /**
@@ -26,6 +27,7 @@ public class Move {
             //vika kirjain P, eli siirto on pawnpromotion
             board[1][Character.getNumericValue(move.charAt(0))] = " ";
             board[0][Character.getNumericValue(move.charAt(1))] = String.valueOf(move.charAt(3));
+            
         }
 
     }

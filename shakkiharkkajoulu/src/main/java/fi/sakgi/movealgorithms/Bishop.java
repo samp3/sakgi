@@ -1,4 +1,4 @@
-package fi.sakgi.chesspiece;
+package fi.sakgi.movealgorithms;
 
 import static fi.sakgi.game.Board.board;
 import static fi.sakgi.game.Board.isKingSafe;
@@ -47,4 +47,5 @@ public class Bishop {
         }
         return list;
     }
+    
 }
