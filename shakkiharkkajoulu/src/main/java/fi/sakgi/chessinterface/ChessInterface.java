@@ -81,75 +81,149 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
     @Override
     public void refresh(Graphics g) {
         Image chessPiecesImage = new ImageIcon("rsz_chesspieces.png").getImage();
-        for (int i = 0; i < 64; i++) {
-            int j = -1;
-            int k = -1;
-            switch (Board.board[i / 8][i % 8]) {
+        if (vuoro) {
+            for (int i = 0; i < 64; i++) {
+                int j = -1;
+                int k = -1;
+                switch (Board.board[i / 8][i % 8]) {
 
-                case "P":
-                    j = 5;
-                    k = 0;
+                    case "P":
+                        j = 5;
+                        k = 0;
 
-                    break;
-                case "R":
-                    j = 2;
-                    k = 0;
+                        break;
+                    case "R":
+                        j = 2;
+                        k = 0;
 
-                    break;
-                case "K":
-                    j = 4;
-                    k = 0;
+                        break;
+                    case "K":
+                        j = 4;
+                        k = 0;
 
-                    break;
-                case "B":
-                    j = 3;
-                    k = 0;
+                        break;
+                    case "B":
+                        j = 3;
+                        k = 0;
 
-                    break;
-                case "Q":
-                    j = 1;
-                    k = 0;
+                        break;
+                    case "Q":
+                        j = 1;
+                        k = 0;
 
-                    break;
-                case "A":
-                    j = 0;
-                    k = 0;
+                        break;
+                    case "A":
+                        j = 0;
+                        k = 0;
 
-                    break;
-                case "a":
-                    j = 0;
-                    k = 1;
+                        break;
+                    case "a":
+                        j = 0;
+                        k = 1;
 
-                    break;
-                case "p":
-                    j = 5;
-                    k = 1;
+                        break;
+                    case "p":
+                        j = 5;
+                        k = 1;
 
-                    break;
-                case "r":
-                    j = 2;
-                    k = 1;
+                        break;
+                    case "r":
+                        j = 2;
+                        k = 1;
 
-                    break;
-                case "k":
-                    j = 4;
-                    k = 1;
+                        break;
+                    case "k":
+                        j = 4;
+                        k = 1;
 
-                    break;
-                case "b":
-                    j = 3;
-                    k = 1;
+                        break;
+                    case "b":
+                        j = 3;
+                        k = 1;
 
-                    break;
-                case "q":
-                    j = 1;
-                    k = 1;
+                        break;
+                    case "q":
+                        j = 1;
+                        k = 1;
 
-                    break;
+                        break;
 
+                }
+                if (k != -1 && j != -1) {
+                    g.drawImage(chessPiecesImage, 100 + (i % 8) * this.sizeOfSquare, 100 + (i / 8) * this.sizeOfSquare, (i % 8 + 1) * this.sizeOfSquare + 100, 100 + (i / 8 + 1) * this.sizeOfSquare, j * 50, k * 50, (j + 1) * 50, (k + 1) * 50, this);
+                }
             }
-            if (k != -1 && j != -1) {
-                g.drawImage(chessPiecesImage, 100 + (i % 8) * this.sizeOfSquare, 100 + (i / 8) * this.sizeOfSquare, (i % 8 + 1) * this.sizeOfSquare + 100, 100 + (i / 8 + 1) * this.sizeOfSquare, j * 50, k * 50, (j + 1) * 50, (k + 1) * 50, this);
+        } else {
+            for (int i = 0; i < 64; i++) {
+                int j = -1;
+                int k = -1;
+                switch (Board.board[i / 8][i % 8]) {
+
+                    case "p":
+                        j = 5;
+                        k = 0;
+
+                        break;
+                    case "r":
+                        j = 2;
+                        k = 0;
+
+                        break;
+                    case "k":
+                        j = 4;
+                        k = 0;
+
+                        break;
+                    case "b":
+                        j = 3;
+                        k = 0;
+
+                        break;
+                    case "q":
+                        j = 1;
+                        k = 0;
+
+                        break;
+                    case "a":
+                        j = 0;
+                        k = 0;
+
+                        break;
+                    case "A":
+                        j = 0;
+                        k = 1;
+
+                        break;
+                    case "P":
+                        j = 5;
+                        k = 1;
+
+                        break;
+                    case "R":
+                        j = 2;
+                        k = 1;
+
+                        break;
+                    case "K":
+                        j = 4;
+                        k = 1;
+
+                        break;
+                    case "B":
+                        j = 3;
+                        k = 1;
+
+                        break;
+                    case "Q":
+                        j = 1;
+                        k = 1;
+
+                        break;
+
+                }
+                if (k != -1 && j != -1) {
+                    g.drawImage(chessPiecesImage, 100 + (i % 8) * this.sizeOfSquare, 100 + (i / 8) * this.sizeOfSquare, (i % 8 + 1) * this.sizeOfSquare + 100, 100 + (i / 8 + 1) * this.sizeOfSquare, j * 50, k * 50, (j + 1) * 50, (k + 1) * 50, this);
+                }
             }
         }
 
