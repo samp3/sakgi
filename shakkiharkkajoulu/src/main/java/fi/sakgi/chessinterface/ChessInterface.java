@@ -9,17 +9,23 @@ import java.awt.Image;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
- * Tama luokka hoitaa pelin grafiikan, seka hiiren liikkuutelut ja
- * nappuloiden siirrot(fyysisesti)
+ * Tama luokka hoitaa pelin grafiikan, seka hiiren liikkuutelut ja nappuloiden
+ * siirrot(fyysisesti)
  */
 public class ChessInterface extends JPanel implements GraphicalChessBoard, MouseListener, MouseMotionListener {
-/**
- * startX ja Y pitavat tallella nappulan lahtokoordinaatteja, endX ja Y taas, minne nappula halutaan siirtaa.
- * sizeOfSquare kertoo kuinka iso yksi ruutu on ja nappulan koon myoskin.
- */
+
+    /**
+     * startX ja Y pitavat tallella nappulan lahtokoordinaatteja, endX ja Y
+     * taas, minne nappula halutaan siirtaa. sizeOfSquare kertoo kuinka iso yksi
+     * ruutu on ja nappulan koon myoskin.
+     */
     private int startX;
     private int startY;
     private int endX;
@@ -28,8 +34,10 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
     //valkoisen vuorolla vuoro = true
     private boolean vuoro = true;
     private JFrame f;
+
     /**
-     * Tekee kaiken, mitä JFramelle tarvii tehda, ennenkuin voi alkaa piirtelemaan.
+     * Tekee kaiken, mitä JFramelle tarvii tehda, ennenkuin voi alkaa
+     * piirtelemaan.
      */
     public void setUp() {
         this.addMouseListener(this);
@@ -80,7 +88,8 @@ public class ChessInterface extends JPanel implements GraphicalChessBoard, Mouse
      */
     @Override
     public void refresh(Graphics g) {
-        Image chessPiecesImage = new ImageIcon("rsz_chesspieces.png").getImage();
+        Image chessPiecesImage = new javax.swing.ImageIcon(getClass().getResource("/images/rsz_chesspieces.png")).getImage();
+
         /*
          valkoisen vuoro
          */

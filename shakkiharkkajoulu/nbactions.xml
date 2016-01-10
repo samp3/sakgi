@@ -14,4 +14,8 @@
             <goal>javadoc:javadoc</goal>
         </goals>
     </action>
+    <action>
+            <actionName>CUSTOM-goal</actionName>
+            <displayName>goal</displayName>
+        </action>
 </actions>
