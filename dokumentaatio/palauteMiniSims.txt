@@ -1,7 +1,0 @@
-28.12.2015 klo 22:00. 
--Ohjelman kuvaus selke‰ ja hienosti pystyy lukemaan readmesta.
--Rectangle luokka n‰ytt‰‰ irtonaiselta, koska sijainti(package) ei kerro mit‰‰n, eik‰ hirve‰sti nime‰minenk‰‰n (muutakuin, ett‰ kyseess‰ on suorakaide).
--EntityManager-luokassa on private constructori keskell‰ koodia, sek‰ myˆs oliomuuttujan mainitseminen. T‰m‰ koodaustyyli on minulle uutta. Kannattaisiko siirt‰‰ ne koodin alkuun? Huom. en ole koskaan k‰ytt‰nyt private contructoria, joten en tied‰ miten siirt‰minen vaikuttaa koodiisi.
--Itse l‰htisin rakentamaan ohjelmaa kokonaisuutena, N‰ytt‰‰ t‰ll‰ hetkell‰, ett‰ olet tehnyt v‰h‰n sielt‰ sun t‰‰lt‰. Luokkakaaviosta kuitenkin n‰kee, ett‰ sinulla on visio ohjelmasta.
--Lis‰isin luokan, mist‰ ajat ohlemaa. Esimerkiksi nimeksi ihan Game. T‰m‰ voisi sijaita samannimisess‰ Game packagessa.
--Mielenkiintoinen projekti! Hauska n‰hd‰ millainen pelist‰ tulee.

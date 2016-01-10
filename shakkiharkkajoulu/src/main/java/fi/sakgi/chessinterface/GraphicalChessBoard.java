@@ -10,8 +10,10 @@ import java.util.function.Consumer;
  */
 public interface GraphicalChessBoard {
 
-    public void setBoard(Board board);
-
+/**
+ * Päivittää pöydän
+ * @param g 
+ */
     public void refresh(Graphics g);
 
 }

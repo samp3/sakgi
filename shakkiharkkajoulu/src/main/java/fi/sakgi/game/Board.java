@@ -6,14 +6,17 @@ import fi.sakgi.movealgorithms.Knight;
 import fi.sakgi.movealgorithms.Pawn;
 import fi.sakgi.movealgorithms.Queen;
 import fi.sakgi.movealgorithms.Rook;
-import java.util.*;
 
 /**
  * Shakkipöytä, pitää kirjaa kaikista mahdollisista siirroista
+ *
  * @author sampe
  */
 public class Board {
 
+    /**
+     * pelilauta, isot kirjaimet vastaavat niitä kenen vuoro on
+     */
     public static String[][] board = {
         {"r", "k", "b", "q", "a", "b", "k", "r"},
         {"p", "p", "p", "p", "p", "p", "p", "p"},
@@ -29,35 +32,34 @@ public class Board {
     /**
      * Kaikki siirtologiikka on UPPERCASE näkökulmasta, joten vuoron vaihtuessa
      * pitää kääntää pelilauta SEKÄ swäpätä kaikki lowercaset uppercaseksi ja
-     * toisinpäin.
+     * toisinpäin. Myös pitää vaihtaa kuninkaat
      */
     public static void flip() {
-        String str;
+        String temp;
         for (int i = 0; i < 32; i++) {
-            int row = i / 8;
-            int column = i % 8;
-            if (Character.isUpperCase(board[row][column].charAt(0))) {
-                str = board[row][column].toLowerCase();
+            int r = i / 8, c = i % 8;
+            if (Character.isUpperCase(board[r][c].charAt(0))) {
+                temp = board[r][c].toLowerCase();
             } else {
-                str = board[row][column].toUpperCase();
+                temp = board[r][c].toUpperCase();
             }
-            if (Character.isUpperCase(board[7 - row][7 - column].charAt(0))) {
-                board[row][column] = board[7 - row][7 - column].toLowerCase();
+            if (Character.isUpperCase(board[7 - r][7 - c].charAt(0))) {
+                board[r][c] = board[7 - r][7 - c].toLowerCase();
             } else {
-                board[row][column] = board[7 - row][7 - column].toUpperCase();
+                board[r][c] = board[7 - r][7 - c].toUpperCase();
             }
-            board[7 - row][7 - column] = str;
+            board[7 - r][7 - c] = temp;
         }
-        //Pitää myös vaihtaa kuninkaiden sijainnit toisinpäin
-        int tempKing = kingPosC;
+        int kingTemp = kingPosC;
         kingPosC = 63 - kingPosL;
-        kingPosL = 63 - tempKing;
+        kingPosL = 63 - kingTemp;
+
     }
 
     /**
-     * Tekee listan kaikista mahdollisista siirroista, käy yksitellen jokaisen
-     * ruudun läpi ja hakee siellä sijaitsevalla nappulalle mahdolliset
-     * siirrot(jos siellä sijaitsee jokin nappula).
+     * Tekee listan(String muodossa) kaikista mahdollisista siirroista, käy
+     * yksitellen jokaisen ruudun läpi ja hakee siellä sijaitsevalla nappulalle
+     * mahdolliset siirrot(jos siellä sijaitsee jokin nappula).
      *
      *
      * @return
@@ -89,99 +91,4 @@ public class Board {
         return list;
     }
 
-    /**
-     * Tarkastaa onko kuningas turvassa siirron jälkeen
-     *
-     * @return
-     */
-    public static boolean isKingSafe() {
-        //bishop & queen
-        int temp = 1;
-        for (int i = -1; i <= 1; i += 2) {
-            for (int j = -1; j <= 1; j += 2) {
-                try {
-                    while (" ".equals(board[kingPosC / 8 + temp * i][kingPosC % 8 + temp * j])) {
-                        temp++;
-                    }
-                    if ("b".equals(board[kingPosC / 8 + temp * i][kingPosC % 8 + temp * j])
-                            || "q".equals(board[kingPosC / 8 + temp * i][kingPosC % 8 + temp * j])) {
-                        return false;
-                    }
-                } catch (Exception e) {
-                }
-                temp = 1;
-            }
-        }
-        //rook & queen
-        for (int i = -1; i <= 1; i += 2) {
-            try {
-                while (" ".equals(board[kingPosC / 8][kingPosC % 8 + temp * i])) {
-                    temp++;
-                }
-                if ("r".equals(board[kingPosC / 8][kingPosC % 8 + temp * i])
-                        || "q".equals(board[kingPosC / 8][kingPosC % 8 + temp * i])) {
-                    return false;
-                }
-            } catch (Exception e) {
-            }
-            temp = 1;
-            try {
-                while (" ".equals(board[kingPosC / 8 + temp * i][kingPosC % 8])) {
-                    temp++;
-                }
-                if ("r".equals(board[kingPosC / 8 + temp * i][kingPosC % 8])
-                        || "q".equals(board[kingPosC / 8 + temp * i][kingPosC % 8])) {
-                    return false;
-                }
-            } catch (Exception e) {
-            }
-            temp = 1;
-        }
-        //knight
-        for (int i = -1; i <= 1; i += 2) {
-            for (int j = -1; j <= 1; j += 2) {
-                try {
-                    if ("k".equals(board[kingPosC / 8 + i][kingPosC % 8 + j * 2])) {
-                        return false;
-                    }
-                } catch (Exception e) {
-                }
-                try {
-                    if ("k".equals(board[kingPosC / 8 + i * 2][kingPosC % 8 + j])) {
-                        return false;
-                    }
-                } catch (Exception e) {
-                }
-            }
-        }
-        //pawn
-        if (kingPosC >= 16) {
-            try {
-                if ("p".equals(board[kingPosC / 80 - 1][kingPosC % 8 - 1])) {
-                    return false;
-                }
-            } catch (Exception e) {
-            }
-            try {
-                if ("p".equals(board[kingPosC / 80 - 1][kingPosC % 8 + 1])) {
-                    return false;
-                }
-            } catch (Exception e) {
-            }
-            //king
-            for (int i = -1; i <= 1; i++) {
-                for (int j = -1; j <= 1; j++) {
-                    if (i != 0 || j != 0) {
-                        try {
-                            if ("a".equals(board[kingPosC / 8 + i][kingPosC % 8 + j])) {
-                                return false;
-                            }
-                        } catch (Exception e) {
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }
 }

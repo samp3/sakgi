@@ -1,74 +1,32 @@
 package fi.sakgi.game;
 
 import fi.sakgi.chessinterface.ChessInterface;
-import java.util.LinkedList;
-
+import static fi.sakgi.game.Board.board;
+import static fi.sakgi.game.Board.kingPosC;
+import static fi.sakgi.game.Board.kingPosL;
 /**
- * Tämä on pääluokka, jossa ohjelman eri osaset yhdistyvät kokonaisuudeksi.
+ * Täältä käynnistetään peli
  */
 public class Game {
 
-    private Player playerWhite;
-    private Player playerBlack;
-    private Board board;
-    private boolean gameIsOver;
-    private boolean whiteTurn;
-    private ChessInterface intrface;
+    private final ChessInterface intrface;
 
     public Game() {
         this.intrface = new ChessInterface();
-        this.playerWhite = new Player();
-        this.playerBlack = new Player();
-        this.board = new Board();
-        gameIsOver = false;
-        whiteTurn = true;
     }
 
-    //käynnistää pelin
+    /**
+     * käynnistää pelin
+     */
     public void play() {
-        this.intrface.setUp();
-        
-        String winner = "";
-////        goThroughPiecesAndCheckIfKingIsAlive(winner);
-//        if (winner.equals("k")) {
-//            System.out.println("Black won");
-//        } else {
-//            System.out.println("White won");
-//        }
-    }
-
-    public void changeTurn() {
-        if (this.whiteTurn) {
-            this.whiteTurn = false;
-        } else {
-            this.whiteTurn = true;
+        while (!"A".equals(board[kingPosC / 8][kingPosC % 8])) {
+            kingPosC++;
         }
-    }
+        while (!"a".equals(board[kingPosL / 8][kingPosL % 8])) {
+            kingPosL++;
+        }
+        intrface.setUp();
 
-//    public void checkIfKingIsAlive() {
-//        String str = "";
-//        goThroughPiecesAndCheckIfKingIsAlive(str);
-//        if (str.equals("kK") || str.equals("Kk")) {
-//            gameIsOver = false;
-//        } else {
-//            gameIsOver = true;
-//        }
-//
-//    }
-//
-//    public void goThroughPiecesAndCheckIfKingIsAlive(String str) {
-//
-//        for (int i = 0; i < 64; i++) {
-//            switch (Board.board[i / 8][i % 8]) {
-//                case "K":
-//                    str += "K";
-//                    break;
-//                case "k":
-//                    str += "k";
-//                    break;
-//            }
-//        }
-//
-//    }
+    }
 
 }

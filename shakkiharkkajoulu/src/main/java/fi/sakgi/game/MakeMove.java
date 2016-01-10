@@ -31,4 +31,5 @@ public class MakeMove {
         }
 
     }
+    //lisää undomove tekoälyä varten
 }
